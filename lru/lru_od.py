@@ -40,23 +40,33 @@ class LRUCache:
 			return self.cache[key]
 
 	def put(self, key:int, value:int) -> None:
-		if len(self.cache) == self.capacity:
-			self.cache.popitem(last=False)
 		self.cache[key] = value
 		self.cache.move_to_end(key)
+		if len(self.cache) > self.capacity:
+			self.cache.popitem(last=False)
+	
 
 # Testing with 2 values
 if __name__ == "__main__":
 	cache = LRUCache(2)
-	cache.put(1,1)
-	cache.put(2,2)
+	print(cache.get(2))
+	cache.put(2,6)
+	print(cache.get(1))
+	cache.put(1,5)
+	cache.put(1,2)
 	print(cache.get(1))
 	print(cache.get(2))
-	cache.put(3,3)
-	print(cache.get(2))
-	print(cache.get(3))
-	cache.put(1,1)
 	print(cache.cache)
+
+	# cache.put(1,1)
+	# cache.put(2,2)
+	# print(cache.get(1))
+	# print(cache.get(2))
+	# cache.put(3,3)
+	# print(cache.get(2))
+	# print(cache.get(3))
+	# cache.put(1,1)
+	# print(cache.cache)
 
 
 
